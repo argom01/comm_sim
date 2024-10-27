@@ -7,11 +7,15 @@
 #define ARGS_ARRAY_SIZE 4
 #define OUTPUT_MESSAGE_SIZE 512
 
+const char* welcome_text = "Welcome to communication simulation program.\n"
+    "Use HELP to see available commands.\n";
+
 const char* help_text = "Available commands:\n"
     "SET PARAM X   - Set PARAM (TEMP, PRESSURE, ALTITUDE) to value X\n"
     "GET PARAM     - Get current value of PARAM (TEMP, PRESSURE, ALTITUDE)\n"
     "HELP          - Display this help message\n"
     "EXIT          - Exit the program\n";
+
 const char* exit_text = "Exit request received. Terminating...\n";
 
 double temperature = 0;
@@ -26,6 +30,7 @@ int main(void) {
     char s[INPUT_BUFFER_SIZE];
     char* args[ARGS_ARRAY_SIZE];
 
+    printf("%s", welcome_text);
     printf("> ");
     while (fgets(s, INPUT_BUFFER_SIZE, stdin)) {
         char message[OUTPUT_MESSAGE_SIZE];
