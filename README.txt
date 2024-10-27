@@ -7,4 +7,3 @@ Available commands:
     EXIT          - Exit the program
 
 Use cmake to install.
-In case it doesn't work on Windows, don't use Windows.
