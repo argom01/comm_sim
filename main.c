@@ -18,7 +18,7 @@ double temperature = 0;
 double pressure = 0;
 double altitude = 0;
 
-void strupr(char* str) {
+void str_to_uppercase(char* str) {
     char* c = str;
     while (*c != '\0') {
         *c = toupper((unsigned char) *c);
@@ -38,7 +38,7 @@ int parse_input(char** args, char* str) {
     int i = 0;
     while (token) {
         if (i < ARGS_ARRAY_SIZE - 1) {
-            strupr(token);
+            str_to_uppercase(token);
             args[i] = token;
         } else {
             return -1;
