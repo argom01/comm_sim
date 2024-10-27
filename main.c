@@ -18,6 +18,33 @@ double temperature = 0;
 double pressure = 0;
 double altitude = 0;
 
+void str_to_uppercase(char* str);
+int parse_input(char** args, char* str);
+int process_command(char* output_message, char** args);
+
+int main(void) {
+    char s[INPUT_BUFFER_SIZE];
+    char* args[ARGS_ARRAY_SIZE];
+
+    printf("> ");
+    while (fgets(s, INPUT_BUFFER_SIZE, stdin)) {
+        char message[OUTPUT_MESSAGE_SIZE];
+
+        if (parse_input(args, s) == -1) {
+            printf("Malformed command. Use HELP for available commands.\n");
+        } else {
+            int code = process_command(message, args);
+
+            printf("%s", message);
+
+            if (code == 1) break; // exit received
+        }
+        printf("> ");
+    }
+
+    return 0;
+}
+
 void str_to_uppercase(char* str) {
     char* c = str;
     while (*c != '\0') {
@@ -123,29 +150,6 @@ int process_command(char* output_message, char** args) {
         snprintf(output_message, OUTPUT_MESSAGE_SIZE, "There seems to be no command named: %s\n"
         "Use HELP to see available commands.\n", keyword);
         return -1;
-    }
-
-    return 0;
-}
-
-int main(void) {
-    char s[INPUT_BUFFER_SIZE];
-    char* args[ARGS_ARRAY_SIZE];
-
-    printf("> ");
-    while (fgets(s, INPUT_BUFFER_SIZE, stdin)) {
-        char message[OUTPUT_MESSAGE_SIZE];
-
-        if (parse_input(args, s) == -1) {
-            printf("Malformed command. Use HELP for available commands.\n");
-        } else {
-            int code = process_command(message, args);
-
-            printf("%s", message);
-
-            if (code == 1) break; // exit received
-        }
-        printf("> ");
     }
 
     return 0;
